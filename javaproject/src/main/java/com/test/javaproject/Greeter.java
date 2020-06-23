@@ -1,7 +1,6 @@
 package com.test.javaproject;
 
 public class Greeter {
-
 	void greeting(Greeting greeting) {
 		greeting.greeting();
 	}
@@ -16,8 +15,5 @@ public class Greeter {
 		
 		Greeting lambdaGreeting = () -> System.out.println ("Hello using lambda");
 		lambdaGreeting.greeting();
-		
-
 	}
-
 }

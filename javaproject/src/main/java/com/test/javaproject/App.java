@@ -1,7 +1,13 @@
 package com.test.javaproject;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
+
 
 /**
  * Hello world!
@@ -339,8 +345,158 @@ public class App
 		System.out.println("SecondSmall : "+secondSmall+" SecondLarge : "+secondLarge);	
 	}
 	
+	public static void errorMethodCheck() {
+    	for(int i=0; i<10;i=i++) {
+    		i+=1;
+    		//System.out.println("a");
+    	}
+    	
+    	try {
+    		System.out.println("A");
+    		badMethode();
+    		System.out.println("B");
+    	} catch (Exception e) {
+    		System.out.println("C");
+    	} finally {
+    		System.out.println("D");
+		}
+    	
+    }
+	
+    public static void badMethode() {
+		throw new Error();
+	}
+	
+    
+    public static void firstRepetitingNumber() {
+    	int a[] = {3,4,5,2,4,7,8,2,4,2,8,4,4,4};
+    	Map<Integer, Integer> tempMap = new HashMap<Integer, Integer>();
+    	for (int tempArray : a) {
+    		int i=1;
+    		//System.out.println(tempArray);
+    		if(tempMap.containsKey(tempArray)) {
+    			System.out.println("The first repeated Value is : "+tempArray);
+    			i = tempMap.get(tempArray);
+    			i++;
+    		} 
+    		tempMap.put(tempArray, i);
+    	}
+    	for(Map.Entry<Integer, Integer> entry : tempMap.entrySet()) {
+    		System.out.println(entry.getKey()+ " Value is " +entry.getValue());
+    	}
+    }
+    
+    public static void reverseTheStringOfChars() {
+    	char[] toReverse = {'v','i','s','h','n','u'};
+//    	for (char a: toReverse) {
+//    		System.out.println(a);
+//    	}
+    	//System.out.println(toReverse.length);
+    	
+    	for(int i = toReverse.length ; i >= 0 ; i--) {
+    		//System.out.println(" int i : "+i);
+    		System.out.println(toReverse[i - 1]);
+    	}
+    }
+    
+    
+    public static void findVowelsInString() {
+    	String text = "An old dog aeiouae";
+    	String vowels = "aeiou";
+    	char[] textToCharArray = text.toLowerCase().trim().toCharArray(); 
+    	int vowelCount = 0;
+    	int consonentCount = 0;
+    	
+    	/*
+    	for(int i=0; i < text.length(); i++) {
+    		for(char c: vowels) {
+    			if(text.toLowerCase().charAt(i) == c) {
+    				vowelCount++;
+    			}
+    		}
+    	}
+    	consonentCount = text.length() - vowelCount;
+    	*/
+    	
+    	for(char c: textToCharArray) {
+    		if(vowels.indexOf(c) != -1) {
+    			vowelCount++;
+    		} else {
+    			consonentCount++;
+    		}
+    	}
+    	
+    	System.out.println("String = "+text+"\nVowel = "+vowelCount+" \nConsonents = "+consonentCount);
+    }
+    
+    
+    public static void linkedListExample() {
+    	LinkedList<String> linkedlist = new LinkedList<>();
+    	linkedlist.add("one");
+    	linkedlist.add("two");
+    	linkedlist.add("three");
+    	linkedlist.add("four");
+    	linkedlist.add("five");
+    	System.out.println(linkedlist.getFirst());
+    	System.out.println(linkedlist.get(2));
+    	System.out.println(linkedlist.peekFirst());
+    	System.out.println(linkedlist.pollLast());
+    	System.out.println(linkedlist.contains("emp"));
+    	for(String temp: linkedlist) {
+    		System.out.println(temp);
+    	}
+    }
+    
+    public static void mostRepeatedWordsInString() {
+    	String text = new String("She sells sea shells!! at the sea shore, she is great");
+    	String formatedString = text.replaceAll("[^a-zA-Z\\s]", "");
+    	String[] stringArray = formatedString.toLowerCase().split(" ");
+    	System.out.println("Formated String : "+formatedString);
+    	Integer count;
+    	//LinkedList<String> tempString = new LinkedList<>();
+    	HashMap<String, Integer> tempMap = new HashMap<>();
+    	
+    	for (String s: stringArray) {
+    		s = s.trim();
+    		count = 1;
+    		if(tempMap.containsKey(s)) {
+    			count = tempMap.get(s);
+    			System.out.println("count : "+count);
+    			tempMap.replace(s, count++);
+    			System.out.println("Duplicate Key "+s+" Value : "+count);
+    			System.out.println("After Increament : "+tempMap.get(s));
+    		} else {
+    			tempMap.put(s, count);
+    			System.out.println("Key "+s+" Value : "+count);
+    		}
+    	}
+    	
+    	tempMap.forEach((k, v) -> System.out.println(k + " is present "+v+" times"));
+    }
+    
+    public static void stackDemoMethod() {
+
+    }
+    
+    public static void primitiveMethodCheck() {
+    	byte b = Byte.MAX_VALUE;
+    	short s = Short.MAX_VALUE;
+    	int i = Integer.MAX_VALUE;
+    	long l = Long.MAX_VALUE;
+    	b++;
+    	s++;
+    	i = i + i;
+    	l++;
+    	System.out.println("Byte b = "+b+" Max Byte Value is = "+Byte.MAX_VALUE);
+    	System.out.println("short s = "+s+" Max Short value is = "+Short.MAX_VALUE);
+    	System.out.println("int b = "+i+" Max int value is = "+Integer.MAX_VALUE + 1);
+    	System.out.println("long b = "+l+" Max long value is = "+Long.MAX_VALUE);
+    	
+    }
+    
     public static void main( String[] args )
     {    	
+    	testMethod();
     	//obj.patter0sAnd1s();
     	//obj.printFibonociSeries();
     	//obj.checkIfPalindromeOrNot("");
@@ -357,8 +513,20 @@ public class App
     	//printNumberOfDigits();
     	//printNoOfPrimeNumbers();
     	//arrayCopy();
-    	printLargestAndSmallestOfArray();
+    	//printLargestAndSmallestOfArray();
+    	//errorMethodCheck()
+    	//firstRepetitingNumber();
+    	//reverseTheStringOfChars();
+    	//findVowelsInString();
+    	//linkedListExample();
+    	//mostRepeatedWordsInString();
+    	//stackDemoMethod();
+    	//primitiveMethodCheck();
+    	
     }
 
-
-}
+	private static void testMethod() {
+		
+		
+	}
+ }
